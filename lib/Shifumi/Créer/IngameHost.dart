@@ -5,15 +5,42 @@
 import 'package:flutter/material.dart';
 import 'package:myfirstapp/Shifumi/Data.dart';
 import 'dart:async';
+import 'package:myfirstapp/Shifumi/Countdown/countdown.dart';
 
-class IngameHost extends StatelessWidget {
+class IngameHost extends StatefulWidget {
   static String routeName = '/IngameHost';
   final String title;
   final String content;
   final _textController = TextEditingController();
-
   IngameHost({Key? key, required this.title, required this.content})
       : super(key: key);
+  @override
+  _IngameHostState createState() => _IngameHostState();
+}
+
+class _IngameHostState extends State<IngameHost> {
+  String _text = 'Please wait...';
+  String _decompte = "10";
+  final _controller = CountDownController();
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Timer(const Duration(seconds: 5), () {
+  //     showDialog(
+  //         context: context,
+  //         builder: (_) => const SimpleDialog(
+  //               title: Text('Have a nice day'),
+  //               children: [Text('Happy coding with Flutter')],
+  //               contentPadding: EdgeInsets.all(25),
+  //             ));
+  //     setState(() {
+  //       _text = 'Everything is ready';
+  //       _decompte = "0";
+  //     });
+  //   });
+  // }
+
 // ignore: use_key_in_widget_constructors
 
   @override
@@ -124,38 +151,51 @@ class IngameHost extends StatelessWidget {
               Row(
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.16,
-                    width: MediaQuery.of(context).size.width * 0.50,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.05,
-                              width: MediaQuery.of(context).size.width,
-                              child: const Text(
-                                'Temps restant',
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                    color: Color.fromRGBO(33, 45, 64, 1)),
-                              )),
-                          Container(
-                              color: const Color.fromRGBO(33, 45, 64, 1),
-                              width: 100,
-                              child: const Text(
-                                '00:05',
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                    color: Color.fromRGBO(164, 180, 148, 1)),
-                              )),
-                        ]),
+                    height: 100,
+                    width: 100,
+                    child: CountDownProgressIndicator(
+                      controller: _controller,
+                      valueColor: Colors.red,
+                      backgroundColor: Colors.blue,
+                      initialPosition: 0,
+                      duration: 10,
+                      text: 'SEC',
+                      onComplete: () => null,
+                    ),
                   ),
+                  // SizedBox(
+                  //   height: MediaQuery.of(context).size.height * 0.16,
+                  //   width: MediaQuery.of(context).size.width * 0.50,
+                  // child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     crossAxisAlignment: CrossAxisAlignment.center,
+                  //     children: [
+                  // SizedBox(
+                  //     height: MediaQuery.of(context).size.height * 0.05,
+                  //     width: MediaQuery.of(context).size.width,
+                  //     child: const Text(
+                  //       'Temps restant',
+                  //       textAlign: TextAlign.center,
+                  //       overflow: TextOverflow.ellipsis,
+                  //       style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 25,
+                  //           color: Color.fromRGBO(33, 45, 64, 1)),
+                  //     )),
+                  // Container(
+                  //     color: const Color.fromRGBO(33, 45, 64, 1),
+                  //     width: 100,
+                  //     child: const Text(
+                  //       '00:05',
+                  //       textAlign: TextAlign.center,
+                  //       overflow: TextOverflow.ellipsis,
+                  //       style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 25,
+                  //           color: Color.fromRGBO(164, 180, 148, 1)),
+                  //     )),
+                  // ]),
+                  // ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.16,
                     width: MediaQuery.of(context).size.width * 0.50,
@@ -178,7 +218,7 @@ class IngameHost extends StatelessWidget {
                           Container(
                               color: const Color.fromRGBO(33, 45, 64, 1),
                               width: 100,
-                              child: const Text(
+                              child: Text(
                                 //'10',
                                 _decompte,
                                 textAlign: TextAlign.center,
@@ -194,48 +234,6 @@ class IngameHost extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  String _text = 'Please wait...';
-  int _decompte = 10;
-
-  @override
-  void initState() {
-    super.initState();
-    Timer(const Duration(seconds: 5), () {
-      showDialog(
-          context: context,
-          builder: (_) => const SimpleDialog(
-                title: Text('Have a nice day'),
-                children: [Text('Happy coding with Flutter')],
-                contentPadding: EdgeInsets.all(25),
-              ));
-      setState(() {
-        _text = 'Everything is ready';
-        _decompte = _decompte - 1;
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          _text,
-          //style: TextStyle(fontSize: 30),
         ),
       ),
     );

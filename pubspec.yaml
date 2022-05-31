@@ -32,6 +32,8 @@ dependencies:
   flutter_svg: ^1.0.3
   cupertino_icons: ^1.0.2
   google_fonts: ^2.3.1
+  #countdown_progress_indicador: ^0.0.1
+
 
 
   # The following adds the Cupertino Icons font to your application.

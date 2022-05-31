@@ -179,7 +179,8 @@ class IngameHost extends StatelessWidget {
                               color: const Color.fromRGBO(33, 45, 64, 1),
                               width: 100,
                               child: const Text(
-                                '10',
+                                //'10',
+                                _decompte,
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -208,6 +209,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String _text = 'Please wait...';
+  int _decompte = 10;
 
   @override
   void initState() {
@@ -222,6 +224,7 @@ class _HomePageState extends State<HomePage> {
               ));
       setState(() {
         _text = 'Everything is ready';
+        _decompte = _decompte - 1;
       });
     });
   }

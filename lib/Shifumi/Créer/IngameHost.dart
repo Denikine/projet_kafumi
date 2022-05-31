@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:myfirstapp/Shifumi/Data.dart';
+import 'dart:async';
 
 class IngameHost extends StatelessWidget {
   static String routeName = '/IngameHost';
@@ -93,12 +94,20 @@ class IngameHost extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: Row(
-                  children: const <Widget>[
+                  children: <Widget>[
                     Expanded(
-                      child: Image(
-                        image: AssetImage('assets/images/kafumi.png'),
-                        fit: BoxFit.fill,
+                      child: Image.asset(
+                        'image/pierre.png',
+                        height: MediaQuery.of(context).size.height * 0.45,
+                        width: MediaQuery.of(context).size.width * 0.80,
                       ),
+                      //   image: AssetImage(
+                      //     './image/pierre.png',
+                      //     height: 100,
+                      //     width: 100,
+                      //   ),
+                      //   fit: BoxFit.fitHeight,
+                      // ),
                     ),
                   ],
                 ),
@@ -184,6 +193,46 @@ class IngameHost extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String _text = 'Please wait...';
+
+  @override
+  void initState() {
+    super.initState();
+    Timer(const Duration(seconds: 5), () {
+      showDialog(
+          context: context,
+          builder: (_) => const SimpleDialog(
+                title: Text('Have a nice day'),
+                children: [Text('Happy coding with Flutter')],
+                contentPadding: EdgeInsets.all(25),
+              ));
+      setState(() {
+        _text = 'Everything is ready';
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text(
+          _text,
+          //style: TextStyle(fontSize: 30),
         ),
       ),
     );
